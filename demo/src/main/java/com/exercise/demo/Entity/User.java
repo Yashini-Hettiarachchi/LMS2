@@ -2,6 +2,7 @@ package com.exercise.demo.Entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import java.util.Date;
 
 @Document(collection = "users")
 public class User {
@@ -12,8 +13,18 @@ public class User {
     private String password;
     private String email;
     private String role;
+    private String provider; // "local", "google", "facebook", etc.
+    private String providerId; // ID from the OAuth provider
+    private String imageUrl; // Profile picture URL
+    private boolean emailVerified;
+    private Date createdAt;
+    private Date lastLogin;
 
     public User() {
+        this.provider = "local";
+        this.emailVerified = false;
+        this.createdAt = new Date();
+        this.lastLogin = new Date();
     }
 
     public User(String _id, String username, String password, String email, String role) {
@@ -22,6 +33,28 @@ public class User {
         this.password = password;
         this.email = email;
         this.role = role;
+        this.provider = "local";
+        this.emailVerified = false;
+        this.createdAt = new Date();
+        this.lastLogin = new Date();
+    }
+
+    // Constructor for OAuth users
+    public User(String username, String email, String provider, String providerId, String imageUrl, boolean isOAuth) {
+        this.username = username;
+        this.email = email;
+        this.role = "STUDENT"; // Default role
+        this.provider = provider;
+        this.providerId = providerId;
+        this.imageUrl = imageUrl;
+        this.emailVerified = true; // Assuming OAuth providers verify emails
+        this.createdAt = new Date();
+        this.lastLogin = new Date();
+    }
+
+    // Factory method for creating OAuth users
+    public static User createOAuthUser(String username, String email, String provider, String providerId, String imageUrl) {
+        return new User(username, email, provider, providerId, imageUrl, true);
     }
 
     public String get_id() {
@@ -64,6 +97,54 @@ public class User {
         this.role = role;
     }
 
+    public String getProvider() {
+        return provider;
+    }
+
+    public void setProvider(String provider) {
+        this.provider = provider;
+    }
+
+    public String getProviderId() {
+        return providerId;
+    }
+
+    public void setProviderId(String providerId) {
+        this.providerId = providerId;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public boolean isEmailVerified() {
+        return emailVerified;
+    }
+
+    public void setEmailVerified(boolean emailVerified) {
+        this.emailVerified = emailVerified;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getLastLogin() {
+        return lastLogin;
+    }
+
+    public void setLastLogin(Date lastLogin) {
+        this.lastLogin = lastLogin;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -71,6 +152,10 @@ public class User {
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", role='" + role + '\'' +
+                ", provider='" + provider + '\'' +
+                ", providerId='" + providerId + '\'' +
+                ", emailVerified=" + emailVerified +
+                ", createdAt=" + createdAt +
                 '}';
     }
 }

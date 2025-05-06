@@ -5,6 +5,8 @@ import com.exercise.demo.Repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class UserService {
 
@@ -13,6 +15,10 @@ public class UserService {
 
     public User registerUser(User user) {
         // In a real application, you would hash the password here
+        if (user.getCreatedAt() == null) {
+            user.setCreatedAt(new Date());
+        }
+        user.setLastLogin(new Date());
         return userRepo.save(user);
     }
 
@@ -30,7 +36,15 @@ public class UserService {
             return false;
         }
         // In a real application, you would verify the hashed password
-        return user.getPassword().equals(password);
+        boolean authenticated = user.getPassword().equals(password);
+
+        if (authenticated) {
+            // Update last login time
+            user.setLastLogin(new Date());
+            userRepo.save(user);
+        }
+
+        return authenticated;
     }
 
     public boolean existsByUsername(String username) {
@@ -39,5 +53,23 @@ public class UserService {
 
     public boolean existsByEmail(String email) {
         return userRepo.findByEmail(email) != null;
+    }
+
+    public User findOrCreateOAuth2User(String name, String email, String provider, String providerId, String imageUrl) {
+        // Check if user exists by email
+        User existingUser = findByEmail(email);
+
+        if (existingUser != null) {
+            // Update OAuth2 info if user exists
+            existingUser.setProvider(provider);
+            existingUser.setProviderId(providerId);
+            existingUser.setImageUrl(imageUrl);
+            existingUser.setLastLogin(new Date());
+            return userRepo.save(existingUser);
+        } else {
+            // Create new user if not exists using the factory method
+            User newUser = User.createOAuthUser(name, email, provider, providerId, imageUrl);
+            return userRepo.save(newUser);
+        }
     }
 }
