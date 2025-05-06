@@ -10,15 +10,15 @@ function Home() {
         <div className="jumbotron text-center">
           <h1 className="display-4">Welcome to Learning Management System</h1>
           <p className="lead">
-            A platform for online learning and course management
+            A platform for sharing and discovering structured learning plans
           </p>
           <hr className="my-4" />
           <p>
-            Browse our courses, register for an account, or login to access your dashboard.
+            Browse learning plans, create your own, or connect with other learners.
           </p>
           <div className="d-flex justify-content-center gap-3">
-            <Link to="/courses" className="btn btn-primary btn-lg">
-              Browse Courses
+            <Link to="/learning-plans" className="btn btn-primary btn-lg">
+              Browse Learning Plans
             </Link>
             <Link to="/register" className="btn btn-success btn-lg">
               Register
@@ -33,9 +33,9 @@ function Home() {
           <div className="col-md-4">
             <div className="card mb-4">
               <div className="card-body text-center">
-                <h3 className="card-title">Learn Anywhere</h3>
+                <h3 className="card-title">Create Learning Plans</h3>
                 <p className="card-text">
-                  Access our courses from anywhere, anytime, on any device.
+                  Organize your learning journey with structured plans and resources.
                 </p>
               </div>
             </div>
@@ -43,9 +43,9 @@ function Home() {
           <div className="col-md-4">
             <div className="card mb-4">
               <div className="card-body text-center">
-                <h3 className="card-title">Expert Instructors</h3>
+                <h3 className="card-title">Connect with Others</h3>
                 <p className="card-text">
-                  Learn from industry experts and experienced professionals.
+                  Follow other learners, like and comment on their learning plans.
                 </p>
               </div>
             </div>
@@ -53,9 +53,9 @@ function Home() {
           <div className="col-md-4">
             <div className="card mb-4">
               <div className="card-body text-center">
-                <h3 className="card-title">Diverse Courses</h3>
+                <h3 className="card-title">Track Your Progress</h3>
                 <p className="card-text">
-                  Choose from a wide range of courses across various categories.
+                  Monitor your learning journey and celebrate your achievements.
                 </p>
               </div>
             </div>
