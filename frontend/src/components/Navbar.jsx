@@ -114,6 +114,15 @@ function Navbar() {
                     </li>
                   </ul>
                 </li>
+                <li className="nav-item">
+                  <button
+                    className="btn btn-outline-light ms-2"
+                    onClick={handleLogout}
+                  >
+                    <i className="bi bi-box-arrow-right me-1"></i>
+                    Logout
+                  </button>
+                </li>
               </>
             ) : (
               <>

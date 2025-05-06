@@ -28,9 +28,9 @@ function Login() {
           email: response.data.email,
           role: response.data.role
         }));
-        
+
         alert('Login successful!');
-        navigate('/courses'); // Redirect to courses page after login
+        navigate('/learning-plans'); // Redirect to learning plans page after login
       } else {
         setError(response.data.message);
       }
