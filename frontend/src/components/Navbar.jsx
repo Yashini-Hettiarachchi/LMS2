@@ -35,7 +35,7 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container">
-        <Link className="navbar-brand" to="/courses">
+        <Link className="navbar-brand" to="/learning-plans">
           Learning Management System
         </Link>
         <button
@@ -56,11 +56,7 @@ function Navbar() {
                 Home
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/courses">
-                Courses
-              </Link>
-            </li>
+
             {user && (
               <>
                 <li className="nav-item">

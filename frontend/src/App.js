@@ -3,9 +3,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
-import CourseList from './components/CourseList';
-import AddCourse from './components/AddCourse';
-import EditCourse from './components/EditCourse';
 import LearningPlanList from './components/LearningPlanList';
 import LearningPlanDetail from './components/LearningPlanDetail';
 import AddLearningPlan from './components/AddLearningPlan';
@@ -27,10 +24,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/oauth/callback" element={<OAuthCallback />} />
 
-        {/* Course Routes */}
-        <Route path="/courses" element={<CourseList />} />
-        <Route path="/add-course" element={<AddCourse />} />
-        <Route path="/edit-course/:courseId" element={<EditCourse />} />
+
 
         {/* Learning Plan Routes */}
         <Route path="/learning-plans" element={<LearningPlanList />} />
